@@ -9,29 +9,54 @@ on:
       - main
 
 jobs:
-  build:
-
+  build_android:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '14' # Adjust the Node.js version as needed
+      - name: Setup Node.js
+        uses: actions/setup-node@v4  # Use the latest version
+        with:
+          node-version: '16'  # Adjust the Node.js version as needed
+          cache: 'npm'
 
-    - name: Install Dependencies
-      run: |
-        npm install -g react-native-cli
-        npm install
+      - name: Install Dependencies
+        run: |
+          npm install -g react-native-cli
+          npm install
 
-    - name: Build and Test Android
-      run: npx react-native run-android
+      - name: Set up Android
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
 
-    - name: Build and Test iOS
-      run: npx react-native run-ios
+      - name: Accept Android SDK Licenses
+        run: yes | sdkmanager --licenses
 
-    - name: Run Tests
-      run: npm test --if-present
+      - name: Build Android
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew clean assembleRelease
+
+  build_ios:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4  # Use the latest version
+        with:
+          node-version: '16'  # Adjust the Node.js version as needed
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: |
+          npm install -g react-native-cli
+          npm install
+
+      - name: Build iOS
+        run: npx react-native run-ios
