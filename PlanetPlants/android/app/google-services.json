@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "510105741315",
+    "project_id": "planetplants-fb433",
+    "storage_bucket": "planetplants-fb433.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510105741315:android:b2594bb47dc2c5ddb2c636",
+        "android_client_info": {
+          "package_name": "com.planetplants"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCG5OW6A4YZF_yMw9LDLgzkR2_GRa9EeHQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

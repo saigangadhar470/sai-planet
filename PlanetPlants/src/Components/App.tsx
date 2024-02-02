@@ -31,7 +31,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 // import Login from "../src/login/Login"
 import Login from "../Components/login/Login";
-import DataHome from './Creator/DataHome';
+import BussinessProviderHome from './Creator/DataHome';
+import SignIn from './login/SignIn';
+import UsersHome from './Users/UsersHome';
 
 const Stack = createNativeStackNavigator();
 
@@ -79,9 +81,13 @@ function App(props: any) {
         <Stack.Screen
           name="Login"
           component={Login}       
-          options={{ title: 'Sign In',headerTitleAlign:"center",headerTintColor:'red' }}
+          options={{ title: 'LogIn',headerTitleAlign:"center",headerTintColor:'red' }}
         />
-        <Stack.Screen name="DataHomeScreen" component={DataHome} />
+        <Stack.Screen name="BussinessProviderHome" component={BussinessProviderHome} />
+        <Stack.Screen name="SignInScreen" component={SignIn} />
+        <Stack.Screen name="UsersHomeScreen" component={UsersHome} />
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,12 +1,12 @@
 import React from "react";
 import { Text, View } from "react-native";
 
-function DataHome(navigation:any){
+function BussinessProviderHome(navigation:any){
     return(
         <View>
-            <Text>DataHome</Text>
+            <Text>This iZ Bussiness</Text>
         </View>
     )
 }
 
-export default DataHome;
+export default BussinessProviderHome;
