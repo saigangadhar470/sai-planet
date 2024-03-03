@@ -2,9 +2,18 @@
  * @format
  */
 
-import {AppRegistry} from 'react-native';
+import { AppRegistry } from 'react-native';
 import App from './src/Components/App';
-import {name as appName} from './app.json';
+import { name as appName } from './app.json';
+import { AuthProvider } from './src/Components/AuthContext';
 
 
-AppRegistry.registerComponent(appName, () => App);
+const ReduxApp = () => (
+
+    <AuthProvider>
+        <App />
+    </AuthProvider>
+
+)
+
+AppRegistry.registerComponent(appName, () => ReduxApp);
