@@ -30,6 +30,19 @@ export const sharedAlignmentConstants = {
 
 const sharedStyles = EStyleSheet.create({
 
+    subHeaderView: {
+        margin:"0.5rem",        
+        backgroundColor: "white",
+        alignItems: "flex-end"
+    },
+
+    subheaderTitle: {
+        right: "0.5rem",
+        fontSize: "0.9rem",
+        color: "#9739E4",
+        fontWeight: 'bold',
+    },
+
     headerText: {
         fontSize: '1.1rem',
         color: sharedColorConstants.black,

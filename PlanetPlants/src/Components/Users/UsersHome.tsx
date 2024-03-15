@@ -8,10 +8,6 @@ import { useAuth } from "../AuthContext";
 import sharedStyles from "../../Styles/sharedStyle";
 
 
-// import {appsss} from "../../Components/firebase"
-
-
-
 function UsersHome({ navigation }: any) {
 
     const [data, setData] = useState([])
@@ -19,7 +15,6 @@ function UsersHome({ navigation }: any) {
 
 
     async function logOut() {
-        console.log("click me")
 
         try {
             await auth().signOut();
@@ -31,7 +26,19 @@ function UsersHome({ navigation }: any) {
     }
 
     useEffect(() => {
-        // const data = firestore().collection().get('bussiness_plants_doc')
+
+        // navigation.setOptions({
+        //     headerTitle: "View Plants",
+        //     headerShown: true,
+        //     headerTitleAlign: 'center',
+        //     headerRight: () => (
+        //         <View style={sharedStyles.subHeaderView}>
+        //             <TouchableOpacity onPress={() => navigation.navigate("CreateProfile", { isProfileEdit: true, })}>
+        //                 <Text style={sharedStyles.subheaderTitle}>Profile</Text>
+        //             </TouchableOpacity>
+        //         </View>
+        //     ),
+        // });
 
         const fetchData = async () => {
 
@@ -44,29 +51,36 @@ function UsersHome({ navigation }: any) {
         fetchData()
     }, [])
 
-    console.log("data", data.length)
+    console.log("data", data[0])
 
     return (
         <>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", backgroundColor: "black", padding: 15 }}>
-                <Text></Text>
-                <Text style={[sharedStyles.headerText, {}]}>Plants</Text>
-                <TouchableOpacity onPress={()=>navigation.navigate("CreateProfile",{isProfileEdit : true,userAuthId:"dRxbapejcRWw8UkhSczhebSy8lX2"})}>
-                    <Text style={[{ textDecorationLine: "underline" }, sharedStyles.headerText]}>Profile</Text>
+            <View style={{ flex: 1 }}>
+                <View style={{ flexDirection: "row", justifyContent: "space-between", padding: 15, backgroundColor: "white" }}>
+                    <Text></Text>
+                    <Text style={[sharedStyles.headerText, {fontWeight:"bold",fontSize:20}]}>Plants</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate("CreateProfile", { isProfileEdit: true, })}>
+                        <Text style={[{ textDecorationLine: "underline", color: "#9739E4" }, sharedStyles.headerText]}>Profile</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <ScrollView style={[{ flex: 10 }]} >
+                    {data.map((item: any, index: number) => {
+                        return <View key={index} style={sharedStyles.cardContainer}>
+                            <Text style={{ color: "black" }}>Plant Name : {item.name}</Text>
+                            <Text style={{ color: "black" }}>Plant Price : {item.price}</Text>
+                            <Text style={{ color: "black" }}>Placement Type: {item.placement}</Text>
+                        </View>
+
+                    })
+                    }
+
+                </ScrollView>
+
+                <TouchableOpacity style={{ margin: 15, marginTop: 15 }} onPress={() => logOut()}>
+                    <Text style={{ padding: 10, backgroundColor: "red", textAlign: "center", color: "white", fontWeight: "bold", fontSize: 20 }}>Log out</Text>
                 </TouchableOpacity>
             </View>
-            <ScrollView style={sharedStyles.cardContainer}>
-                <View>
-                    <Text style={{ color: 'red' }}> welcome userr</Text>
-{/* 
-                    <TouchableOpacity onPress={() => navigation.navigate("CreateProfile")}>
-                        <Text style={{ color: 'red' }}> profile</Text>
-                    </TouchableOpacity> */}
-
-                    <TouchableOpacity onPress={() => logOut()}><Text style={LoginStyles.text}>log out</Text></TouchableOpacity>
-
-                </View>
-            </ScrollView>
         </>
     )
 }

@@ -31,7 +31,7 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from "../Components/login/Login";
-import BussinessProviderHome from './Creator/DataHome';
+import BussinessProviderHome from './Owner/DataHome';
 import SignIn from './login/SignIn';
 import UsersHome from './Users/UsersHome';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -72,6 +72,7 @@ type SectionProps = PropsWithChildren<{
 //     </View>
 //   );
 // }
+
 let { height, width: deviceWidth } = Dimensions.get('window');
 
 EStyleSheet.build({
@@ -96,11 +97,9 @@ function App(props: any) {
 
   const userDetails_From_Auth = useAuth(); //to verify whether the user is loggedIn or not
 
-
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
 
   console.log("isUserLoggedIn", userDetails_From_Auth?.phoneNumber,userDetails_From_Auth?.uid)
 
@@ -112,19 +111,23 @@ function App(props: any) {
     <NavigationContainer>
 
       {userDetails_From_Auth === null ? <Stack.Navigator>
-        {/* <Stack.Screen name="UsersHomeScreen" component={UsersHome} options={{headerShown:false}}/> */}
 
-        {/* <Stack.Screen name="CreateProfile" component={CreateProfile} /> */}
+        {/* <Stack.Screen name="BussinessProviderHosme" component={BussinessProviderHome} options={{headerShown:false}}/> */}
+         <Stack.Screen name="UsersHomeScreen" component={UsersHome} options={{headerShown:false}}/>
+       {/* <Stack.Screen name="CreateProfile" component={CreateProfile} /> */}
+
         <Stack.Screen
           name="Login"
           component={Login}
           options={{ title: 'LogIn', headerTitleAlign: "center", headerTintColor: 'red' }}
         />
+
         <Stack.Screen name="SignInScreen" component={SignIn} />
+
       </Stack.Navigator> :
         <Stack.Navigator>
 
-          {defaultNumbers.includes(userDetails_From_Auth?.phoneNumber) && <Stack.Screen name="BussinessProviderHome" component={BussinessProviderHome} />}
+          {defaultNumbers.includes(userDetails_From_Auth?.phoneNumber) && <Stack.Screen name="BussinessProviderHome" component={BussinessProviderHome} options={{headerShown:false}} />}
           {!defaultNumbers.includes(userDetails_From_Auth?.phoneNumber) && <Stack.Screen name="UsersHomeScreen" component={UsersHome} options={{headerShown:false}}/>}
 
           <Stack.Screen name="CreateProfile" component={CreateProfile} />
@@ -156,32 +159,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
-
-
-// <NavigationContainer>
-
-// {!isUserLoggedIn ?
-//   <Stack.Navigator>
-
-//     <Stack.Screen
-//       name="Login"
-//       component={Login}
-//       options={{ title: 'LogIn', headerTitleAlign: "center", headerTintColor: 'red' }}
-//     />
-
-//     <Stack.Screen name="BussinessProviderHome" component={BussinessProviderHome} />
-
-//   </Stack.Navigator>
-
-//   :
-
-//   <Stack.Navigator>
-
-//     {defaultNumbers.includes(userDetailss?.user?.phoneNumber) && <Stack.Screen name="SignInScreen" component={SignIn} />}
-//     {!defaultNumbers.includes(userDetailss?.user?.phoneNumber)&&<Stack.Screen name="UsersHomeScreen" component={UsersHome} />}
-
-
-//   </Stack.Navigator>
-// }
-// </NavigationContainer>
