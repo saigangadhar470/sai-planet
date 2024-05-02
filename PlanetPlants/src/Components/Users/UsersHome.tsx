@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import auth from "@react-native-firebase/auth"
 import LoginStyles from "../../Styles/login";
 import { Firestore } from "firebase/firestore";
@@ -58,7 +58,7 @@ function UsersHome({ navigation }: any) {
             <View style={{ flex: 1 }}>
                 <View style={{ flexDirection: "row", justifyContent: "space-between", padding: 15, backgroundColor: "white" }}>
                     <Text></Text>
-                    <Text style={[sharedStyles.headerText, {fontWeight:"bold",fontSize:20}]}>Plants</Text>
+                    <Text style={[sharedStyles.headerText, { fontWeight: "bold", fontSize: 20 }]}>Plants</Text>
                     <TouchableOpacity onPress={() => navigation.navigate("CreateProfile", { isProfileEdit: true, })}>
                         <Text style={[{ textDecorationLine: "underline", color: "#9739E4" }, sharedStyles.headerText]}>Profile</Text>
                     </TouchableOpacity>
@@ -66,10 +66,19 @@ function UsersHome({ navigation }: any) {
 
                 <ScrollView style={[{ flex: 10 }]} >
                     {data.map((item: any, index: number) => {
+                        console.log("data", item.imagesList)
                         return <View key={index} style={sharedStyles.cardContainer}>
                             <Text style={{ color: "black" }}>Plant Name : {item.name}</Text>
                             <Text style={{ color: "black" }}>Plant Price : {item.price}</Text>
                             <Text style={{ color: "black" }}>Placement Type: {item.placement}</Text>
+                            {(item.imagesList !== undefined && item?.imagesList.length > 0) &&
+                                <ScrollView horizontal={true} showsHorizontalScrollIndicator={true}>
+                                    {item.imagesList?.map((imageObj: any) =>
+                                        <Image key={imageObj.url} source={{ uri: imageObj.url }} style={{ width: 200, height: 200, marginBottom: 40, marginTop: 40, marginRight: 10 }} />
+                                    )
+                                    }
+                                </ScrollView>}
+
                         </View>
 
                     })

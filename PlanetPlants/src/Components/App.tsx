@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react';
 import type { PropsWithChildren } from 'react';
 
 
+
 import {
   Dimensions,
   SafeAreaView,
@@ -101,7 +102,7 @@ function App(props: any) {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  console.log("isUserLoggedIn", userDetails_From_Auth?.phoneNumber,userDetails_From_Auth?.uid)
+  console.log("isUserLoggedIn", userDetails_From_Auth?.phoneNumber, userDetails_From_Auth?.uid)
 
   // user Auth {"displayName": null, "email": null, "emailVerified": false, "isAnonymous": false,
   //  "metadata": {"creationTime": 1706806114065, "lastSignInTime": 1706807235262}, "multiFactor": {"enrolledFactors": [Array]}, "phoneNumber": "+917659913161", "photoURL": null, "providerData": [[Object]],
@@ -112,9 +113,9 @@ function App(props: any) {
 
       {userDetails_From_Auth === null ? <Stack.Navigator>
 
-        {/* <Stack.Screen name="BussinessProviderHosme" component={BussinessProviderHome} options={{headerShown:false}}/> */}
-         <Stack.Screen name="UsersHomeScreen" component={UsersHome} options={{headerShown:false}}/>
-       {/* <Stack.Screen name="CreateProfile" component={CreateProfile} /> */}
+        {/* <Stack.Screen name="BussinessProviderHosme" component={BussinessProviderHome} options={{ headerShown: false }} /> */}
+        {/* <Stack.Screen name="UsersHomeScreen" component={UsersHome} options={{headerShown:false}}/> */}
+        {/* <Stack.Screen name="CreateProfile" component={CreateProfile} /> */}
 
         <Stack.Screen
           name="Login"
@@ -127,10 +128,16 @@ function App(props: any) {
       </Stack.Navigator> :
         <Stack.Navigator>
 
-          {defaultNumbers.includes(userDetails_From_Auth?.phoneNumber) && <Stack.Screen name="BussinessProviderHome" component={BussinessProviderHome} options={{headerShown:false}} />}
-          {!defaultNumbers.includes(userDetails_From_Auth?.phoneNumber) && <Stack.Screen name="UsersHomeScreen" component={UsersHome} options={{headerShown:false}}/>}
+          {defaultNumbers.includes(userDetails_From_Auth?.phoneNumber) && <Stack.Screen name="BussinessProviderHome" component={BussinessProviderHome} options={{ headerShown: false }} />}
+          {!defaultNumbers.includes(userDetails_From_Auth?.phoneNumber) && <Stack.Screen name="UsersHomeScreen" component={UsersHome} options={{ headerShown: false }} />}
 
-          <Stack.Screen name="CreateProfile" component={CreateProfile} />
+          <Stack.Screen name="CreateProfile"
+            component={CreateProfile}
+            options={({ route }) => ({
+              title: route.params && 'isProfileEdit' in route.params && route.params.isProfileEdit ? 'Edit Profile' : 'Create Profile',
+              headerTitleAlign: 'center'
+            })}
+          />
 
         </Stack.Navigator>
       }

@@ -1,8 +1,10 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import {getStorage} from "firebase/storage";
+import {getFirestore} from "firebase/firestore";
 import { AppRegistry } from 'react-native';
 import { getAnalytics } from "firebase/analytics";
-import { name as appName } from './app.json';
+import { name as appName } from "../../app.json";
 import App from "../Components/App"
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -26,4 +28,6 @@ const app = initializeApp(firebaseConfig);
 
 AppRegistry.registerComponent(appName, () => App);
 
+export const storage = getStorage(app);
+export const db = getFirestore(app);
 // const analytics = getAnalytics(app);

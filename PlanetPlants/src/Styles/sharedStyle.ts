@@ -30,8 +30,20 @@ export const sharedAlignmentConstants = {
 
 const sharedStyles = EStyleSheet.create({
 
+    profilePicContainer: {
+        alignItems: 'center',
+        marginBottom: "1.3rem",
+    },
+    profilePic: {
+        width: "10rem",
+        height: "10rem",
+        // width:150,
+        // height: 150,
+        borderRadius: 75,
+    },
+
     subHeaderView: {
-        margin:"0.5rem",        
+        margin: "0.5rem",
         backgroundColor: "white",
         alignItems: "flex-end"
     },
